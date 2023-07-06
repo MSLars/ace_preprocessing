@@ -91,6 +91,6 @@ python preprocessing/create_relation_classification_samples.py
 
 ## Status of Project
 
-As for tody (July 2023) this repo helpts to reproduce paper results.
+As for today (July 2023) this repo helps to reproduce paper results.
 We plan to extend the functionality and provide a useful framework to preprocess the ACE 05
 dataset in the near future.

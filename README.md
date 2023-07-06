@@ -3,7 +3,19 @@
 ## Data
 
 Download the original ACE 2005 data from https://catalog.ldc.upenn.edu/LDC2006T06.
-Extract data, you should receive a folder with a name similar to `ace_2005_td_v7`.
+Extract (unzip) data, you should receive a folder with a name similar to `ace_2005_td_v7`.
+
+Copy the `ace_2005_td_v7` folder under the folder `ace_raw_data`.
+
+The resulting projectstructure looks like this:
+
+```
+├── ace_raw_data
+│   ├── ace_2005_td_v7
+├── data_split
+├── ...
+```
+The structure inside the `ace_2005_td_v7` folder should look like:
 
 ```
 ├── data (* our focus)

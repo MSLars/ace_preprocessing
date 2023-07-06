@@ -7,7 +7,7 @@ Extract (unzip) data, you should receive a folder with a name similar to `ace_20
 
 Copy the `ace_2005_td_v7` folder under the folder `ace_raw_data`.
 
-The resulting projectstructure looks like this:
+The resulting project structure looks like this:
 
 ```
 ├── ace_raw_data

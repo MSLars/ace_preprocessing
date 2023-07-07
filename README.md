@@ -12,28 +12,25 @@ The resulting project structure looks like this:
 ```
 ├── ace_raw_data
 │   ├── ace_2005_td_v7
+│   │   ├── data (* our focus)
+│   │   │   ├── Arabic
+│   │   │   ├── Chinese
+│   │   │   ├── English (* our focus)
+│   │   │   │   ├── bc
+│   │   │   │   │   ├── adj
+│   │   │   │   │   ├── fp1
+│   │   │   │   │   ├── fp2
+│   │   │   │   │   ├── timex2norm (* our focus)
+│   │   │   │   │   │   ├── <file_id>.ag.xml
+│   │   │   │   │   │   ├── <file_id>.apf.xml (* our focus, annotations)
+│   │   │   │   │   │   ├── <file_id>.sgm.xml (* our focus, raw text)
+│   │   │   │   │   │   ├── <file_id>.tab.xml
+│   │   │   │   ├── ..
+│   │   ├── docs
+│   │   ├── dtd
+│   ├── __init__.py 
 ├── data_split
 ├── ...
-```
-The structure inside the `ace_2005_td_v7` folder should look like:
-
-```
-├── data (* our focus)
-│   ├── Arabic
-│   ├── Chinese
-│   ├── English (* our focus)
-│   │   ├── bc
-│   │   │   ├── adj
-│   │   │   ├── fp1
-│   │   │   ├── fp2
-│   │   │   ├── timex2norm (* our focus)
-│   │   │   │   ├── <file_id>.ag.xml
-│   │   │   │   ├── <file_id>.apf.xml (* our focus, annotations)
-│   │   │   │   ├── <file_id>.sgm.xml (* our focus, raw text)
-│   │   │   │   ├── <file_id>.tab.xml
-│   │   ├── ..
-├── docs
-├── dtd
 ```
 
 ## Environment
@@ -68,25 +65,16 @@ files will be in folder `preprocessed_relation_classification_data`.
 
 By default, we use all documents from the ACE 2005 dataset. 
 If you want to exclude some "informal" sources, as typically done in other
-preprocessing pipelines, change comments in line 90 and 91.
+preprocessing pipelines, use the parameter `reduced`.
 
 For complete dataset:
-
-```python
-    # splits = srsly.read_json(Path(extended.__path__[0]) / "reduced_split.json")
-    splits = srsly.read_json(Path(extended.__path__[0]) / "complete_split.json")
+```bash
+python preprocessing/create_relation_classification_samples.py
 ```
 
 For the reduced dataset:
-```python
-    splits = srsly.read_json(Path(extended.__path__[0]) / "reduced_split.json")
-    # splits = srsly.read_json(Path(extended.__path__[0]) / "complete_split.json")
-```
-
-To start preprocessing, execute:
-
 ```bash
-python preprocessing/create_relation_classification_samples.py
+python preprocessing/create_relation_classification_samples.py --reduced
 ```
 
 ## Status of Project

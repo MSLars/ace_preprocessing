@@ -5,6 +5,7 @@ from pathlib import Path
 
 import spacy
 import srsly
+import typer
 from bs4 import BeautifulSoup
 from spacy.tokenizer import Tokenizer
 from tqdm import tqdm
@@ -15,8 +16,11 @@ from data_split import extended
 from preprocessing.data_model import RelationRepr, extract_entities, extract_times, extract_values, \
     extract_relations, tokenize_elem_and_mentions, ElementRepr
 
-if __name__ == "__main__":
-    INCLUDE_OTHER = False
+
+INCLUDE_OTHER = False
+
+
+def main(reduced: bool = False):
 
     nlp = spacy.load("en_core_web_sm")
 
@@ -62,7 +66,6 @@ if __name__ == "__main__":
 
     simple_url_re = re.compile(r'''^https?://''')
 
-
     def custom_tokenizer(nlp):
         return Tokenizer(nlp.vocab,
                          rules=new_special_cases,
@@ -70,7 +73,6 @@ if __name__ == "__main__":
                          suffix_search=suffix_regex.search,
                          infix_finditer=infix_regex.finditer,
                          url_match=simple_url_re.match)
-
 
     # Add special case rule
     nlp.tokenizer = custom_tokenizer(nlp)
@@ -87,8 +89,9 @@ if __name__ == "__main__":
         "test": []
     }
 
-    # splits = srsly.read_json(Path(extended.__path__[0]) / "reduced_split.json")
     splits = srsly.read_json(Path(extended.__path__[0]) / "complete_split.json")
+    if reduced:
+        splits = srsly.read_json(Path(extended.__path__[0]) / "reduced_split.json")
 
     all_sgm_files = [f for f in englich_data_path.rglob("*.sgm") if "timex2norm" in f.parts]
 
@@ -442,3 +445,7 @@ if __name__ == "__main__":
             preprocessed_relation_classification_data.__path__[0]) / f"{split}.jsonl"
 
         srsly.write_jsonl(output_file, samples)
+
+
+if __name__ == "__main__":
+    typer.run(main)
